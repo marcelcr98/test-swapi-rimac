@@ -1,0 +1,86 @@
+service: reto-serverless
+frameworkVersion: "3"
+custom:
+  documentation: ${file(docs/serverless.docs.yml):documentation}
+  tableName: "movie-db-${sls:stage}"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - Fn::GetAtt: [MovieTable, Arn ]
+  environment:
+    DYNAMODB_TABLE: ${self:custom.tableName}
+
+functions:
+  getMovieSwapi:
+    handler: src/functions/movie/getMovieSwapi.handler
+    events:
+      - http:
+          documentation: ${file(docs/getMovieSwapi.yml):documentation}
+          path: /movie/swapi/{id}
+          method: get
+
+  getMovies:
+    handler: src/functions/movie/getMovies.handler
+    events:
+      - http:
+          documentation: ${file(docs/getMovies.yml):documentation}
+          path: /movie
+          method: get
+
+  getMovie:
+    handler: src/functions/movie/getMovie.handler
+    events:
+      - http:
+          documentation: ${file(docs/getMovie.yml):documentation}
+          path: /movie/{id}
+          method: get
+  
+  addMovie:
+    handler: src/functions/movie/addMovie.handler
+    events:
+      - http:
+          documentation: ${file(docs/addMovie.yml):documentation}
+          path: /movie
+          method: post
+
+resources:
+  Resources:
+    MovieTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        TableName: ${self:custom.tableName}
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+  - serverless-jest-plugin
+  - serverless-openapi-documentation
+
+
+package:
+  individually: true
+  excludeDevDependencies: true

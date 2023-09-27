@@ -1,0 +1,12 @@
+documentation:
+  version: "1.0.0"
+  title: "Reto Técnico SWAPI"
+  description:  Reto Backend Developer con TS/Serverless/SWAPI
+  contact:
+    name: Marcelo Cuellar
+    email: mcuellarr98@@gmail.com
+
+  models:
+    - name: ErrorServer
+      description: Error de servidor
+      contentType: application/json

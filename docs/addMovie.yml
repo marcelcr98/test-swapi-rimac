@@ -1,0 +1,18 @@
+documentation:
+  summary: Crear una película
+  description: Crear una película en la base de datos
+  requestBody:
+    description: "Json con datos de la película"
+  requestModels:
+    application/json:
+  methodResponses:
+    - statusCode: 201
+      responseBody:
+        description: Película Creada
+      responseModels:
+        application/json: 
+    - statusCode: 500
+      responseBody:
+        description: Error de servidor
+      responseModels:
+        application/json: 

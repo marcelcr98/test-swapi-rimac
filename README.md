@@ -6,13 +6,13 @@ Nota: Debe tener instalado Docker para ejecutar la BD localmente.
 ## Scripts
 
 
-###Instalar dependencias.
+## Instalar dependencias.
 
 ```
 npm i
 ```
 
-###Ejecución de base de datos local y migracion de tabla.
+## Ejecución de base de datos local y migracion de tabla.
 
 ```
 npm run docker
@@ -31,14 +31,14 @@ Pruebas unitarias:
 npm run test
 ```
 
-###Documentación OpenAPI.
+##Documentación OpenAPI.
 
 ```
 npm run openapi
 ```
 
 
-###Despliegue Serverless.
+## Despliegue Serverless.
 
 ```
 serverless deploy

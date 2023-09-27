@@ -19,7 +19,7 @@ npm run docker
 npm run migrate 
 ```
 
-Ejecutar en modo local y pruebas unitarias.
+## Ejecutar en modo local y pruebas unitarias.
 
 Modo local (serverless-offline):
 ```
@@ -31,7 +31,7 @@ Pruebas unitarias:
 npm run test
 ```
 
-##Documentación OpenAPI.
+## Documentación OpenAPI.
 
 ```
 npm run openapi
@@ -64,6 +64,7 @@ Endpoints del proyecto para su uso.
 
 ### Body Película Test (POST)
 
+```
 
 Body:
 {
